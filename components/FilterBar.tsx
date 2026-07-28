@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { filters } from "@/lib/layoffs";
 
-export default function FilterBar() {
+export default function FilterBar({ tags }: { tags: string[] }) {
+  const filters = ["All", ...tags];
   const [active, setActive] = useState<string>(filters[0]);
 
   return (

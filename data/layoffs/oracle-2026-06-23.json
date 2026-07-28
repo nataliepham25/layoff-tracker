@@ -1,0 +1,15 @@
+{
+  "company": "Oracle",
+  "industry": "Enterprise Software",
+  "dateAnnounced": "2026-06-23",
+  "employeesAffected": 21000,
+  "percentageAffected": 13,
+  "summary": "Oracle cut roughly 13% of its workforce, about 21,000 roles, citing AI-driven efficiency gains across operations. The cuts span cloud infrastructure, sales, and support teams worldwide.",
+  "sources": [
+    {
+      "label": "Reuters",
+      "url": "https://www.reuters.com/technology/oracle-layoffs-2026"
+    }
+  ],
+  "tags": ["Big tech", "AI-driven"]
+}

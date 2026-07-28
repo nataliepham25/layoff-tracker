@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
 import StatsStrip from "@/components/StatsStrip";
+import { getAllLayoffs } from "@/lib/getLayoffs";
+import { getLayoffStats } from "@/lib/stats";
 
 export const metadata: Metadata = {
   title: "Stats | Layoff Tracker",
 };
 
 export default function StatsPage() {
+  const entries = getAllLayoffs();
+
   return (
     <main className="mx-auto max-w-3xl px-4 py-8 sm:px-6">
       <div className="mb-6">
@@ -14,7 +18,7 @@ export default function StatsPage() {
           A closer look at the numbers behind this year&apos;s layoffs.
         </p>
       </div>
-      <StatsStrip />
+      <StatsStrip stats={getLayoffStats(entries)} />
       <div className="rounded-xl border border-border bg-surface-2 p-6 text-center text-sm text-text-secondary">
         Detailed charts and breakdowns are coming soon.
       </div>
