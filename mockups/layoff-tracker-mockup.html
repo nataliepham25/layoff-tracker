@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Layoff Desk — Homepage Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --surface-page: #faf9f6;
+    --surface-card: #ffffff;
+    --surface-muted: #f2f0ea;
+    --text-primary: #1a1a18;
+    --text-secondary: #6b6a63;
+    --text-muted: #9a998f;
+    --border: #e6e4db;
+    --accent-bg: #e6f1fb;
+    --accent-text: #0c447c;
+    --teal-bg: #e1f5ee;
+    --teal-text: #085041;
+    --coral-bg: #faece7;
+    --coral-text: #712b13;
+    --radius: 8px;
+    --radius-card: 12px;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--surface-page);
+    color: var(--text-primary);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.5;
+  }
+
+  .page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 4rem;
+  }
+
+  /* Header */
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .header .logo {
+    font-weight: 600;
+    font-size: 17px;
+    letter-spacing: -0.01em;
+  }
+
+  .header nav {
+    display: flex;
+    gap: 22px;
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+
+  .header nav a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .header nav a.active {
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+
+  .header nav a:hover { color: var(--text-primary); }
+
+  /* Hero */
+  .hero { margin-bottom: 2rem; }
+
+  .hero h1 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 500;
+    font-size: 30px;
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+  }
+
+  .hero p {
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  /* Stats */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 2rem;
+  }
+
+  .stat-card {
+    background: var(--surface-muted);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+  }
+
+  .stat-card .label {
+    font-size: 12.5px;
+    color: var(--text-secondary);
+    margin: 0 0 4px;
+  }
+
+  .stat-card .value {
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  /* Filters */
+  .filters {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .chips { display: flex; gap: 8px; flex-wrap: wrap; }
+
+  .chip {
+    font-size: 13px;
+    padding: 5px 13px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .chip.active {
+    background: var(--accent-bg);
+    color: var(--accent-text);
+    border-color: transparent;
+  }
+
+  select {
+    font-size: 13px;
+    font-family: inherit;
+    color: var(--text-secondary);
+    background: var(--surface-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 6px 10px;
+  }
+
+  /* Feed */
+  .card {
+    background: var(--surface-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    padding: 16px 20px;
+    margin-bottom: 12px;
+  }
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    gap: 12px;
+  }
+
+  .card-company { display: flex; align-items: center; gap: 10px; }
+
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--surface-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+
+  .card-company .name {
+    font-weight: 600;
+    font-size: 15px;
+    margin: 0;
+  }
+
+  .card-company .date {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin: 2px 0 0;
+  }
+
+  .tag {
+    font-size: 12px;
+    padding: 4px 11px;
+    border-radius: var(--radius);
+    white-space: nowrap;
+  }
+
+  .tag.blue { background: var(--accent-bg); color: var(--accent-text); }
+  .tag.teal { background: var(--teal-bg); color: var(--teal-text); }
+  .tag.coral { background: var(--coral-bg); color: var(--coral-text); }
+
+  .card p.blurb {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin: 0 0 12px;
+  }
+
+  .card-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .affected {
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .affected svg { width: 14px; height: 14px; opacity: 0.7; }
+
+  .read-more {
+    font-size: 13px;
+    color: var(--accent-text);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .read-more:hover { text-decoration: underline; }
+  .read-more svg { width: 12px; height: 12px; }
+
+  a:focus-visible, button:focus-visible, .chip:focus-visible {
+    outline: 2px solid var(--accent-text);
+    outline-offset: 2px;
+  }
+
+  @media (max-width: 480px) {
+    .stats { grid-template-columns: 1fr 1fr; }
+    .hero h1 { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="header">
+    <span class="logo">The layoff desk</span>
+    <nav>
+      <a href="#" class="active">Home</a>
+      <a href="#">Stats</a>
+      <a href="#">Submit a tip</a>
+    </nav>
+  </div>
+
+  <div class="hero">
+    <h1>Tracking tech's toughest year</h1>
+    <p>Every layoff, every company, updated as it happens.</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat-card">
+      <p class="label">Layoffs tracked</p>
+      <p class="value">322</p>
+    </div>
+    <div class="stat-card">
+      <p class="label">People affected</p>
+      <p class="value">205,832</p>
+    </div>
+    <div class="stat-card">
+      <p class="label">Companies</p>
+      <p class="value">50</p>
+    </div>
+  </div>
+
+  <div class="filters">
+    <div class="chips">
+      <button class="chip active">All</button>
+      <button class="chip">Big tech</button>
+      <button class="chip">Startups</button>
+      <button class="chip">AI-driven</button>
+    </div>
+    <select>
+      <option>Newest first</option>
+      <option>Largest first</option>
+    </select>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="card-company">
+        <div class="avatar">OR</div>
+        <div>
+          <p class="name">Oracle</p>
+          <p class="date">Jun 23, 2026</p>
+        </div>
+      </div>
+      <span class="tag blue">Big tech</span>
+    </div>
+    <p class="blurb">Cut roughly 13% of its workforce, about 21,000 roles, citing AI-driven efficiency gains across operations.</p>
+    <div class="card-bottom">
+      <span class="affected">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        21,000 affected
+      </span>
+      <a href="#" class="read-more">Read more
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="card-company">
+        <div class="avatar">MS</div>
+        <div>
+          <p class="name">Microsoft</p>
+          <p class="date">Jul 2, 2026</p>
+        </div>
+      </div>
+      <span class="tag teal">AI-driven</span>
+    </div>
+    <p class="blurb">Reduced headcount by 4,800, mostly across the Xbox gaming division, in the latest of several rounds this year.</p>
+    <div class="card-bottom">
+      <span class="affected">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        4,800 affected
+      </span>
+      <a href="#" class="read-more">Read more
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="card-company">
+        <div class="avatar">LC</div>
+        <div>
+          <p class="name">Lucid</p>
+          <p class="date">Jun 14, 2026</p>
+        </div>
+      </div>
+      <span class="tag coral">Startup</span>
+    </div>
+    <p class="blurb">Trimmed its workforce as part of a broader cost-cutting push across EV manufacturing.</p>
+    <div class="card-bottom">
+      <span class="affected">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        1,200 affected
+      </span>
+      <a href="#" class="read-more">Read more
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

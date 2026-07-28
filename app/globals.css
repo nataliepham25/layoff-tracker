@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #0a0a0a;
+  --surface-1: #f5f5f6;
+  --surface-2: #ffffff;
+  --border: #e4e4e7;
+  --text-primary: #0a0a0a;
+  --text-secondary: #6b6b70;
+  --bg-accent: #e6f1fb;
+  --text-accent: #0b5fa5;
+  --radius: 8px;
+}
+
+body {
+  color: var(--text-primary);
+  background: var(--background);
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
