@@ -14,12 +14,16 @@ export default function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="border-b border-border bg-background/95 backdrop-blur sticky top-0 z-10">
-      <div className="mx-auto flex max-w-3xl items-center justify-between gap-3 px-4 py-4 sm:px-6">
-        <Link href="/" className="whitespace-nowrap text-base font-medium">
+    <header className="sticky top-0 z-10 border-b border-border bg-background/95 backdrop-blur">
+      <div className="h-[3px] bg-text-accent" />
+      <div className="mx-auto flex max-w-3xl items-center justify-between gap-2 px-3 py-4 sm:gap-3 sm:px-6">
+        <Link
+          href="/"
+          className="whitespace-nowrap font-serif text-lg font-medium tracking-tight sm:text-xl"
+        >
           Layoff Tracker
         </Link>
-        <nav className="flex items-center gap-3 whitespace-nowrap text-sm text-text-secondary sm:gap-5">
+        <nav className="flex items-center gap-2.5 whitespace-nowrap text-[11px] uppercase tracking-wide text-text-secondary sm:gap-6 sm:text-[13px]">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
             return (
@@ -28,8 +32,8 @@ export default function Header() {
                 href={link.href}
                 className={
                   isActive
-                    ? "font-medium text-text-primary"
-                    : "hover:text-text-primary transition-colors"
+                    ? "border-b-[1.5px] border-text-accent pb-0.5 font-medium text-text-primary"
+                    : "border-b-[1.5px] border-transparent pb-0.5 transition-colors hover:text-text-primary"
                 }
               >
                 {link.label}

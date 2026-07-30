@@ -8,7 +8,7 @@ export default function AboutPage() {
   return (
     <main className="mx-auto max-w-3xl px-4 py-8 sm:px-6">
       <div className="mb-6">
-        <h1 className="mb-1.5 text-[22px] font-medium">About Layoff Tracker</h1>
+        <h1 className="mb-1.5 font-serif text-[28px] font-medium">About Layoff Tracker</h1>
         <p className="text-sm text-text-secondary">
           Layoff Tracker follows tech industry layoffs in real time, giving a
           clear, up-to-date picture of which companies are cutting jobs, how

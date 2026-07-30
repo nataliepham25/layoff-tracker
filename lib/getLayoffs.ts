@@ -39,6 +39,18 @@ function parseTags(fileName: string, value: unknown): string[] {
   return value as string[];
 }
 
+function parseBody(fileName: string, value: unknown): string[] | undefined {
+  if (value === undefined) return undefined;
+  if (
+    !Array.isArray(value) ||
+    value.length === 0 ||
+    !value.every((p) => typeof p === "string" && p.length > 0)
+  ) {
+    fail(fileName, '"body" must be a non-empty array of strings if present');
+  }
+  return value as string[];
+}
+
 function parseEntry(fileName: string, raw: unknown): LayoffEntry {
   if (typeof raw !== "object" || raw === null) {
     fail(fileName, "expected a JSON object");
@@ -83,6 +95,7 @@ function parseEntry(fileName: string, raw: unknown): LayoffEntry {
     employeesAffected: data.employeesAffected as number,
     percentageAffected: data.percentageAffected as number | undefined,
     summary: data.summary as string,
+    body: parseBody(fileName, data.body),
     sources: parseSources(fileName, data.sources),
     tags: parseTags(fileName, data.tags),
   };
@@ -108,4 +121,8 @@ export function getAllLayoffs(): LayoffEntry[] {
   return entries.sort(
     (a, b) => Date.parse(b.dateAnnounced) - Date.parse(a.dateAnnounced)
   );
+}
+
+export function getLayoffBySlug(slug: string): LayoffEntry | undefined {
+  return getAllLayoffs().find((entry) => entry.id === slug);
 }

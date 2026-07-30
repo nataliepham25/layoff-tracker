@@ -5,10 +5,19 @@
   "employeesAffected": 21000,
   "percentageAffected": 13,
   "summary": "Oracle cut roughly 13% of its workforce, about 21,000 roles, citing AI-driven efficiency gains across operations. The cuts span cloud infrastructure, sales, and support teams worldwide.",
+  "body": [
+    "Oracle confirmed on June 23 that it is cutting roughly 13% of its global workforce, or about 21,000 roles, in one of the largest single rounds of layoffs the company has made in its history. The reductions touch cloud infrastructure, sales, and customer support organizations, with some regional offices affected more heavily than others.",
+    "In an internal memo, leadership framed the cuts as part of a broader push toward what it called \"AI-driven operating efficiency\" — automating support workflows and internal tooling that previously required larger teams. The company said it would continue hiring selectively in AI infrastructure and research roles even as it shrinks elsewhere.",
+    "Affected employees in the US were offered severance packages tied to tenure, along with extended healthcare coverage through the end of the year. Oracle's stock rose slightly in after-hours trading following the announcement, as investors read the cuts as a signal of tighter cost discipline heading into the next fiscal year."
+  ],
   "sources": [
     {
       "label": "Reuters",
       "url": "https://www.reuters.com/technology/oracle-layoffs-2026"
+    },
+    {
+      "label": "Bloomberg",
+      "url": "https://www.bloomberg.com/news/oracle-workforce-reduction-2026"
     }
   ],
   "tags": ["Big tech", "AI-driven"]

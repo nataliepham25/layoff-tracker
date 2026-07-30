@@ -13,7 +13,7 @@ export default function StatsPage() {
   return (
     <main className="mx-auto max-w-3xl px-4 py-8 sm:px-6">
       <div className="mb-6">
-        <h1 className="mb-1.5 text-[22px] font-medium">Stats</h1>
+        <h1 className="mb-1.5 font-serif text-[28px] font-medium">Stats</h1>
         <p className="text-sm text-text-secondary">
           A closer look at the numbers behind this year&apos;s layoffs.
         </p>

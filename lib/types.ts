@@ -14,6 +14,8 @@ export type LayoffEntry = {
   /** e.g. 13 for 13%. Omit if unknown. */
   percentageAffected?: number;
   summary: string;
+  /** Full write-up, one paragraph per entry. Falls back to `summary` if omitted. */
+  body?: string[];
   sources: LayoffSource[];
   tags: string[];
 };

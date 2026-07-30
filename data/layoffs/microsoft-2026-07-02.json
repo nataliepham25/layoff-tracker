@@ -4,10 +4,19 @@
   "dateAnnounced": "2026-07-02",
   "employeesAffected": 4800,
   "summary": "Microsoft reduced headcount by 4,800, mostly across the Xbox gaming division, in the latest of several rounds this year. The company pointed to a broader restructuring of its entertainment business.",
+  "body": [
+    "Microsoft notified employees on July 2 that it is cutting 4,800 positions, with the reductions concentrated in the Xbox gaming division. It is the third round of gaming-division layoffs the company has made this year, following earlier cuts tied to the integration of its studio acquisitions.",
+    "Gaming CEO Phil Spencer told staff the changes were meant to \"reduce layers of management\" and refocus investment on a smaller number of flagship titles, rather than an across-the-board budget cut. Several previously announced projects were shelved as part of the reorganization, though the company did not name them publicly.",
+    "The cuts add to a difficult year for the games industry more broadly, with several major publishers announcing reductions of their own. Impacted Microsoft employees will retain access to internal job boards for open roles elsewhere in the company for 60 days before their formal end date."
+  ],
   "sources": [
     {
       "label": "The Verge",
       "url": "https://www.theverge.com/microsoft-xbox-layoffs-2026"
+    },
+    {
+      "label": "IGN",
+      "url": "https://www.ign.com/articles/microsoft-xbox-layoffs-july-2026"
     }
   ],
   "tags": ["Big tech", "AI-driven"]

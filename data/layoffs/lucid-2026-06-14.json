@@ -5,10 +5,19 @@
   "employeesAffected": 1200,
   "percentageAffected": 18,
   "summary": "Lucid trimmed its workforce as part of a broader cost-cutting push across EV manufacturing. The company said the reductions were concentrated in manufacturing and corporate roles.",
+  "body": [
+    "Lucid Motors announced on June 14 that it is cutting about 18% of its workforce, or roughly 1,200 employees, as part of a cost-reduction plan aimed at extending its cash runway. The company said the reductions are concentrated at its Casa Grande, Arizona manufacturing plant and in corporate functions.",
+    "In a filing, Lucid attributed the cuts to slower-than-expected demand for its Air and Gravity models and rising input costs for battery materials. The company said it still expects to hit its full-year production target, but with a smaller, more consolidated workforce.",
+    "Lucid's stock fell nearly 9% in the days following the announcement. The company said affected employees would receive a minimum of twelve weeks of severance pay and continued benefits coverage through the transition period."
+  ],
   "sources": [
     {
       "label": "TechCrunch",
       "url": "https://techcrunch.com/lucid-layoffs-2026"
+    },
+    {
+      "label": "Electrek",
+      "url": "https://electrek.co/lucid-workforce-reduction-2026"
     }
   ],
   "tags": ["Startup"]
