@@ -160,3 +160,28 @@ this is a separate running log.)
   entry was written correctly *and* the draft file disappeared, then separately
   confirmed Dismiss deletes a draft and the section falls back to "No pending
   drafts."
+
+## 7. Public tip submissions — a second, independent moderation queue
+
+- New `TipSubmission` type (`lib/types.ts`) and `app/submit/actions.ts`
+  (`submitTipAction`): a public (no auth) server action that validates Company,
+  "What happened?", and Source link as required, treats a free-text note as
+  optional, and writes one JSON file per tip to `/data/submissions` — a separate
+  folder from `/data/drafts`, since these come from outside tipsters rather than
+  the scraper and deserve their own queue. No identifying info (name, email, IP)
+  is collected; the previous "your email (optional)" field was dropped entirely
+  to match the "tips are anonymous" framing.
+- Replaced the old disabled-button placeholder on `/submit` with a real client
+  form (`components/SubmitTipForm.tsx`, `useFormState`/`useFormStatus`, same
+  pattern as Phase 6's `LayoffForm`) — inline validation errors, a success
+  message, and the form clears on success.
+- Deliberately did **not** build a review UI for these in `/admin` this round —
+  the ask was the intake side only ("save it to a moderation queue ... for now").
+  For now, reviewing means opening the JSON files directly in
+  `/data/submissions`; a Drafts-style list-with-actions section is the natural
+  next step if/when that's wanted, mirroring Phase 6.
+- Verified with Playwright against the dev server: submitting the empty form
+  shows the right inline error and writes nothing; submitting a filled-out tip
+  (including the optional note) writes a correctly-shaped JSON file to
+  `/data/submissions` and resets the form with a success message; confirmed no
+  public page reads or lists that directory.
