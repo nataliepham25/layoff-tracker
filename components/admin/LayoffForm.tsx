@@ -52,7 +52,19 @@ function SubmitButton() {
   );
 }
 
-export default function LayoffForm() {
+export type LayoffFormInitialValues = {
+  draftId?: string;
+  dateAnnounced?: string;
+  summary?: string;
+  sourceLabel0?: string;
+  sourceUrl0?: string;
+};
+
+export default function LayoffForm({
+  initialValues,
+}: {
+  initialValues?: LayoffFormInitialValues;
+}) {
   const [state, formAction] = useFormState(createLayoffAction, initialState);
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -83,13 +95,23 @@ export default function LayoffForm() {
         </div>
       )}
 
+      {initialValues?.draftId && (
+        <input type="hidden" name="draftId" value={initialValues.draftId} />
+      )}
+
       <div className="grid gap-4 sm:grid-cols-2">
         <Field label="Company" name="company" required placeholder="e.g. Acme Corp" />
         <Field label="Industry" name="industry" required placeholder="e.g. Enterprise Software" />
       </div>
 
       <div className="grid gap-4 sm:grid-cols-3">
-        <Field label="Date announced" name="dateAnnounced" type="date" required />
+        <Field
+          label="Date announced"
+          name="dateAnnounced"
+          type="date"
+          required
+          defaultValue={initialValues?.dateAnnounced}
+        />
         <Field label="Employees affected" name="employeesAffected" type="number" min={0} required />
         <Field
           label="Percentage affected"
@@ -107,6 +129,8 @@ export default function LayoffForm() {
         required
         rows={3}
         placeholder="One or two sentences for the feed card."
+        defaultValue={initialValues?.summary}
+        hint={initialValues?.summary ? "Pre-filled from the draft headline — replace with your own write-up." : undefined}
       />
 
       <TextAreaField
@@ -134,11 +158,13 @@ export default function LayoffForm() {
                 name={`sourceLabel${i}`}
                 placeholder="Label (optional)"
                 className={inputClass}
+                defaultValue={i === 0 ? initialValues?.sourceLabel0 : undefined}
               />
               <input
                 name={`sourceUrl${i}`}
                 placeholder="https://…"
                 className={inputClass}
+                defaultValue={i === 0 ? initialValues?.sourceUrl0 : undefined}
               />
             </div>
           ))}

@@ -13,8 +13,12 @@ import {
 import type { LayoffEntry, LayoffSource } from "@/lib/types";
 
 const LAYOFFS_DIR = path.join(process.cwd(), "data", "layoffs");
+const DRAFTS_DIR = path.join(process.cwd(), "data", "drafts");
 const SOURCE_ROW_COUNT = 3;
 const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
+
+/** A bare filename with no path separators — guards fs calls built from form input. */
+const SAFE_ID_PATTERN = /^[a-zA-Z0-9-]+$/;
 
 export type LoginState = { error?: string };
 
@@ -139,9 +143,28 @@ export async function createLayoffAction(
     JSON.stringify(entry, null, 2) + "\n"
   );
 
+  const draftId = String(formData.get("draftId") ?? "").trim();
+  if (draftId && SAFE_ID_PATTERN.test(draftId)) {
+    const draftPath = path.join(DRAFTS_DIR, `${draftId}.json`);
+    if (fs.existsSync(draftPath)) fs.unlinkSync(draftPath);
+  }
+
   revalidatePath("/");
   revalidatePath("/stats");
   revalidatePath("/layoffs/[slug]", "page");
+  revalidatePath("/admin");
 
   return { success: { id } };
+}
+
+export async function dismissDraftAction(formData: FormData): Promise<void> {
+  if (!isAuthenticated()) return;
+
+  const id = String(formData.get("id") ?? "").trim();
+  if (!id || !SAFE_ID_PATTERN.test(id)) return;
+
+  const draftPath = path.join(DRAFTS_DIR, `${id}.json`);
+  if (fs.existsSync(draftPath)) fs.unlinkSync(draftPath);
+
+  revalidatePath("/admin");
 }

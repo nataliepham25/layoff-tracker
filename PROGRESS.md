@@ -118,3 +118,45 @@ this is a separate running log.)
 - `/stats` shows the same stat strip as the homepage with a placeholder for future
   charts/breakdowns.
 - No CMS/database — adding an entry means adding a JSON file and redeploying.
+
+## 6. Draft queue — scraped headlines awaiting manual review
+
+- New `DraftEntry` type (`lib/types.ts`) and `getAllDrafts()` / `getDraftById()`
+  (`lib/getDrafts.ts`), reading `/data/drafts` — a private, admin-only mirror of the
+  `/data/layoffs` reader, but tolerant of malformed files (skips rather than throws,
+  since these are machine-written) and never imported by any public page or route.
+- `scripts/fetch-drafts.mjs`: standalone Node script (no framework dependency) that
+  fetches the Google News RSS feed for `"tech layoffs"`, parses it with
+  `fast-xml-parser`, and writes one JSON file per new item to `/data/drafts`
+  (headline, link, publish date, fetched-at timestamp). Skips any item whose link
+  already appears as a draft's `link` or as a `sources[].url` in `/data/layoffs` —
+  verified by mocking the feed response with a URL already present in the
+  Lucid sample entry and confirming it was excluded while a genuinely new URL
+  was saved.
+- Scheduling: chose GitHub Actions (`.github/workflows/fetch-drafts.yml`, daily cron
+  + `workflow_dispatch`) over Vercel Cron. Reason: this app's whole data model is
+  JSON files committed to git, but Vercel's production filesystem is read-only
+  outside `/tmp` and doesn't persist across invocations — a Vercel Cron function
+  could fetch the feed but couldn't durably save new drafts without also scripting
+  a GitHub API commit. The Action runs directly against the git checkout, writes
+  the files, and `git commit && git push`es only when there's something new,
+  which triggers Vercel's normal auto-deploy.
+- `/admin` now has a **Drafts** section (`components/admin/DraftsList.tsx`) above the
+  existing add-entry form, listing each pending draft's headline, link, and date with
+  two actions:
+  - **Publish** — a link to `/admin?draftId=…` that pre-fills the same Phase 5
+    `LayoffForm` (date announced, a starting-point summary from the headline, and
+    the first source row) via a new `initialValues` prop, so company, industry,
+    exact headcount, and the real write-up are still typed by hand. On successful
+    submit, `createLayoffAction` deletes the source draft file (matched by a hidden
+    `draftId` field).
+  - **Dismiss** — a new `dismissDraftAction` server action that deletes the draft
+    file directly; both it and the draft-cleanup path in `createLayoffAction`
+    guard the id against path traversal before touching the filesystem.
+- Verified end-to-end with Playwright against the running dev server (not just
+  `tsc`/build): logged into `/admin`, confirmed a sample draft's headline/link
+  render, clicked Publish and confirmed the form fields came back pre-filled with
+  the right values, submitted the form and confirmed both the new `/data/layoffs`
+  entry was written correctly *and* the draft file disappeared, then separately
+  confirmed Dismiss deletes a draft and the section falls back to "No pending
+  drafts."
